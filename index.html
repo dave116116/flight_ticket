@@ -1,13 +1,5 @@
-<div id="bio"></div>
-<head>
-    <link rel="stylesheet" type="text/css" href="style.css">
-        </head>
-
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js">
-    </script>
-<script src="main.js">
-    </script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js">
+    
     </script>
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/2.6.3/flatpickr.min.css">
@@ -24,8 +16,8 @@
     
     
     
-    
     <div id="main">
+        
         <div class="form-group">
             <label class="control-label">Flight Search</label>
             
@@ -34,497 +26,777 @@
         <div class="form-group">
             
         </div>
+        <label class="control-label">Enter Your Flight details below</label>
         
-        Enter Your Flight details below<br>
+        <br>
         <button class="one_way_btn">One Way</button>
         <button class="round_trip_btn">Round Trip</button><br>
         
-        <input class="autocomplete_from" type="text" placeholder="From" id="from_auto"/>
+        <input class="autocomplete_from" type="text" placeholder="From" id="from_auto" />
         
-        <input class="autocomplete_to" type="text" id="to_auto"  placeholder="To"/>
+        <input class="autocomplete_to" type="text" id="to_auto" placeholder="To" />
         
         
-        <input id="date-picker" class="datepicker-input " type="text">
+        <input id="date-picker" class="datepicker-input " type="text" placeholder="Date">
             <input id="range-picker" class="daterangepicker-input" type="text">
-                <button id="search_btn">Seach Flights</button>
-                
-                </div>
+                <button id="search_btn">Search Flights</button>
+                <img src="https://www.pedul.com/images/loading.gif" id="loader">
+    </div>
     
     
     <div id="bio"></div>
     
     
     
-    
-    
-    
-<style>
-    #bio{
-        min-height: 100%;
-        min-width: 1024px;
-        
-        /* Set up proportionate scaling */
-        width: 100%;
-        height: auto;
-        
-        /* Set up positioning */
-        position: fixed;
-        top: 0;
-        left: 0;
-        background-image: url("https://images.unsplash.com/photo-1499561385668-5ebdb06a79bc?auto=format&fit=crop&w=1949&q=80");
-        background-size: cover;
-        background-position: center center;
+    <style>
+   
+   
+   #bio{
+       min-height: 100%;
+       min-width: 1024px;
+       /* Set up proportionate scaling */
+       width: 100%;
+       height: auto;
+       /* Set up positioning */
+       position: fixed;
+       top: 0;
+       left: 0;
+       background-image: url("https://images.unsplash.com/photo-1499561385668-5ebdb06a79bc?auto=format&fit=crop&w=1949&q=80");
+       background-size: cover;
+       background-position: center center;
+   }
+    #main{
+        position: absolute;
+        z-index: 15;
+        top: 40%;
+        left: 30%;
+        margin: -100px 0 0 -150px;
+        opacity: 0.7;
     }
-
-
-
-#main{
+    body {
+        margin: 50px;
+    }
+    .form-group {
+        margin-bottom: 20px;
+    }
+    .control-label {
+        display: block;
+    }
+    .autocomplete-wrapper {
+        position: relative;
+    }
+    .autocomplete-results, .autocomplete-results_to {
+        position: absolute;
+        background: white;
+        z-index: 1;
+        top: 50px;
+        left: 0;
+        font-size: 13px;
+        border: solid 1px #ddd;
+        border-top-width: 0;
+        border-bottom-color: #ccc;
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    }
+    .autocomplete-results_to{
+        left: 234px;
+        width:210px;
+    }
+    .autocomplete-result {
+        padding: 12px 15px;
+        border-bottom: solid 1px #eee;
+        cursor: pointer;
+    }
+    .autocomplete-result:last-child {
+        border-bottom-width: 0;
+    }
+    .autocomplete-location {
+        opacity: .8;
+        font-size: smaller;
+    }
+    #to_auto{
+        position:absolute;
+        left: 235px;
+        top:0px;
+    }
+    #from_auto{
+        position:absolute;
+        left: 0px;
+        top:0px;
+    }
+    #date-picker{
+        position:absolute;
+        left: 445px;
+        top:164px;
+    }
+    #range-picker{
+        position:absolute;
+        left: 445px;
+        top:163px;
+    }
+    #search_btn{
+        position:absolute;
+        left: 700px;
+        top:180px;
+        width:140px;
+    }
+    input{
+        background: transparent;
+        border-right-style:none;
+        border-left-style:none;
+        border-top-style:none;
+        border-bottom-color:white;
+        width:200px;
+        font-size:40px;
+        border-width: 4px;
+        color:white;
+    }
+    input:focus {
+        outline-width: 0;
+        color:white;
+    }
+    ::placeholder {
+        /* Chrome, Firefox, Opera, Safari 10.1+ */
+        color: black;
+        opacity: 1;
+        /* Firefox */
+        font-family: Papyrus, fantasy;
+    }
+    button{
+        background:transparent;
+        border-color:white;
+        font-size: 19px;
+        color:black;
+        font-family: Papyrus, fantasy;
+        border-radius: 4px
+    }
+    button:focus {
+        outline-width: 0;
+    }
+    button:hover {
+        background-color: black;
+        opacity: 1;
+        color:white;
+    }
+    label{
+        font-size: 30px;
+        color:white;
+        font-family: Papyrus, fantasy;
+    }
+    strong{
+        font-size: 100px;
+    }
+    #disp_area{
+        position:absolute;
+        background-color:black;
+        width: 800px;
+        top: 270px;
+        height: 1000px;
+    }
+    table {
+        position:absolute;
+        background: black;
+        border-collapse: separate;
+        box-shadow: inset 0 1px 0 #fff;
+        font-size: 12px;
+        line-height: 24px;
+        margin: 30px auto;
+        text-align: left;
+        width: 700px;
+        top:200px;
+        color:white;
+    }
+    th {
+        background: url(https://jackrugile.com/images/misc/noise-diagonal.png), linear-gradient(#777, #444);
+        border-left: 1px solid #555;
+        border-right: 1px solid #777;
+        border-top: 1px solid #555;
+        border-bottom: 1px solid #333;
+        box-shadow: inset 0 1px 0 #999;
+        color: #fff;
+        font-weight: bold;
+        padding: 10px 15px;
+        position: relative;
+        text-shadow: 0 1px 0 #000;
+    }
+    tr:nth-child(odd) td {
+        background: #667182 url(https://jackrugile.com/images/misc/noise-diagonal.png);
+    }
+    #loader{
+        position:absolute;
+        width:200px;
+        height:200px;
+        left:150px;
+        top: 300px;
+    }
     
-    position: absolute;
-    z-index: 15;
-    top: 40%;
-    left: 30%;
-    margin: -100px 0 0 -150px;
-    opacity: 0.7;
-}
-
-body {
-    margin: 50px;
-}
-
-.form-group {
-    margin-bottom: 20px;
-}
-.control-label {
-    display: block;
-}
-
-.autocomplete-wrapper {
-    position: relative;
-}
-
-.autocomplete-results, .autocomplete-results_to {
-    position: absolute;
-    background: white;
-    z-index: 1;
-    top: 50px;
-    left: 0;
-    font-size: 13px;
-    border: solid 1px #ddd;
-    border-top-width: 0;
-    border-bottom-color: #ccc;
-    box-shadow:
-    0 5px 10px rgba(0, 0, 0, 0.2);
-}
-
-.autocomplete-results_to{
-    left: 234px;
-    width:210px;
-    
-}
-
-.autocomplete-result {
-    padding: 12px 15px;
-    border-bottom: solid 1px #eee;
-    cursor: pointer;
-}
-
-.autocomplete-result:last-child {
-    border-bottom-width: 0;
-}
-
-.autocomplete-location {
-    opacity: .8;
-    font-size: smaller;
-}
-
-#to_auto{
-    position:absolute;
-    left: 235px;
-    top:0px;
-    
-}
-
-#from_auto{
-    position:absolute;
-    left: 0px;
-    top:0px;
-    
-}
-#date-picker{
-    position:absolute;
-    left: 445px;
-    top:86px;
-}
-
-#range-picker{
-    position:absolute;
-    left: 445px;
-    top:113px;
-}
-
-#search_btn{
-    position:absolute;
-    left: 700px;
-    top:100px;
-}
-
-input{
-    background: transparent;
-    border-right-style:none;
-    border-left-style:none;
-    border-top-style:none;
-    border-bottom-color:white;
-    width:200px;
-    font-size:40px;
-    border-width: 4px;
-    color:white;
-}
-
-input:focus {
-    outline-width: 0;
-    color:white;
-    
-}
-
-::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
-    color: black;
-    opacity: 1; /* Firefox */
-}
-
-button{
-    background:transparent;
-    border-color:white;
-    font-size: 20px;
-    color:black;
-}
-
-button:focus {
-    outline-width: 0;
-}
-
-.daterangepicker-input{
-    font-size: 15px;
-}
+   
+   
     </style>
-
-
-<script>
- 
- 
- //https://images.unsplash.com/photo-1495822892661-2ead864e1c7b?auto=format&fit=crop&w=2689&q=80
- 
- 
- //https://images.unsplash.com/photo-1490380169520-0a4b88d52565?auto=format&fit=crop&w=1950&q=80
- 
- 
- //https://images.unsplash.com/photo-1499561385668-5ebdb06a79bc?auto=format&fit=crop&w=1949&q=80
- 
- //Using jQuery on my actual project, but this could've
- //been rewritten without it
- 
- $(function() {
-   
-   
-   
-   $(".one_way_btn").click(function(){
-                           $(".datepicker-input").show()
-                           $(".daterangepicker-input").hide()
-                           $(".datepicker-input").empty()
-                           $(".daterangepicker-input").empty()
-                           $(".datepicker-input").each(function (i) {
-                                                       var tost =  flatpickr("#" + this.id, {
-                                                                             allowInput: true,
-                                                                             enableTime: false,
-                                                                             dateFormat: "d-m-Y"
-                                                                             });
-                                                       
-                                                       tst.destroy()
+    
+    
+    <script>
+        
+    
+    //https://images.unsplash.com/photo-1495822892661-2ead864e1c7b?auto=format&fit=crop&w=2689&q=80
+    //https://images.unsplash.com/photo-1490380169520-0a4b88d52565?auto=format&fit=crop&w=1950&q=80
+    //https://images.unsplash.com/photo-1499561385668-5ebdb06a79bc?auto=format&fit=crop&w=1949&q=80
+    //Using jQuery on my actual project, but this could've
+    //been rewritten without it
+    var one_way_bool = true;
+    
+    
+    $(function() {
+      
+      $("#loader").hide()
+      
+      
+      $(".one_way_btn").click(function() {
+                              $(".one_way_btn").css({
+                                                    "background-color": "black",
+                                                    "color": "white"
+                                                    });
+                              $(".round_trip_btn").css({
+                                                       "background-color": "transparent",
+                                                       "color": "black"
                                                        });
-                           
-                           });
-   $(".round_trip_btn").click(function(){
-                              $(".datepicker-input ").hide()
-                              $(".daterangepicker-input").show()
-                              $(".daterangepicker-input").empty()
+                              
+                              
+                              one_way_bool = true;
+                              
+                              $("#date-picker").css({
+                                                    "position": "absolute",
+                                                    "width": "200px",
+                                                    "color": "white",
+                                                    "left": "445px"
+                                                    });
+                              $("#from_auto").css({
+                                                  "width": "200px",
+                                                  "color": "white",
+                                                  "left": "0px"
+                                                  });
+                              $("#to_auto").css({
+                                                "width": "200px",
+                                                "color": "white",
+                                                "left": "235px"
+                                                });
+                              
+                              $("#search_btn").css({
+                                                   "left": "670px"
+                                                   });
+                              
+                              
+                              
+                              
+                              $(".datepicker-input").show()
+                              $(".daterangepicker-input").hide()
                               $(".datepicker-input").empty()
-                              $(".daterangepicker-input").each(function (i) {
-                                                               var tst =  flatpickr("#" + this.id, {
-                                                                                    allowInput: true, //On or off doesn't change error
-                                                                                    enableTime: false,
-                                                                                    dateFormat: "d-m-Y",
-                                                                                    mode: "range"
-                                                                                    });
-                                                               
-                                                               tost.destroty()
-                                                               
-                                                               });
+                              $(".daterangepicker-input").empty()
+                              $(".datepicker-input").each(function(i) {
+                                                          flatpickr("#" + this.id, {
+                                                                    allowInput: true,
+                                                                    enableTime: false,
+                                                                    dateFormat: "y-m-d"
+                                                                    });
+                                                          
+                                                          });
                               
                               });
-   
-   
-   
-   
-   
-   
-   
-   $(".one_way_btn").click(function(){
-                           $(".daterangepicker-input").each(function (i) {
-                                                            flatpickr("#" + this.id, {
-                                                                      allowInput: true, //On or off doesn't change error
-                                                                      enableTime: false,
-                                                                      dateFormat: "d-m-Y",
-                                                                      mode: "multiple"
-                                                                      });
-                                                            });
+      $(".round_trip_btn").click(function() {
+                                 one_way_bool = false;
+                                 $(".round_trip_btn").css({
+                                                          "background-color": "black",
+                                                          "color": "white"
+                                                          });
+                                 
+                                 //adjust positions of input and button tag
+                                 $("#range-picker").css({
+                                                        "position": "absolute",
+                                                        "width": "390px",
+                                                        "color": "white",
+                                                        "left": "360px"
+                                                        });
+                                 $("#from_auto").css({
+                                                     "width": "150px",
+                                                     "color": "white",
+                                                     "left": "0px"
+                                                     });
+                                 $("#to_auto").css({
+                                                   "width": "180px",
+                                                   "color": "white",
+                                                   "left": "170px"
+                                                   });
+                                 
+                                 $("#search_btn").css({
+                                                      "left": "760px"
+                                                      });
+                                 
+                                 
+                                 
+                                 
+                                 $(".one_way_btn").css({
+                                                       "background-color": "transparent",
+                                                       "color": "black"
+                                                       });
+                                 $(".daterangepicker-input").attr("placeholder", "Date")
+                                 $(".datepicker-input ").hide()
+                                 $(".daterangepicker-input").show()
+                                 $(".daterangepicker-input").empty()
+                                 $(".datepicker-input").empty()
+                                 $(".daterangepicker-input").each(function(i) {
+                                                                  flatpickr("#" + this.id, {
+                                                                            allowInput: true, //On or off doesn't change error
+                                                                            enableTime: false,
+                                                                            dateFormat: "y-m-d",
+                                                                            mode: "range"
+                                                                            });
+                                                                  
+                                                                  
+                                                                  });
+                                 
+                                 });
+      
+      });
+      
+      
+      
+      var options = {
+          shouldSort: true,
+          threshold: 0.4,
+          maxPatternLength: 32,
+          keys: [{
+                 name: 'iata',
+                 weight: 0.5
+                 }, {
+                 name: 'name',
+                 weight: 0.3
+                 }, {
+                 name: 'city',
+                 weight: 0.2
+                 }]
+      };
+    
+    var fuse = new Fuse(airports, options)
+    
+    
+    var ac = $('.autocomplete_from')
+    .on('click', function(e) {
+        e.stopPropagation();
+        })
+        .on('focus keyup', search)
+        .on('keydown', onKeyDown);
+        
+        var wrap = $('<div>')
+        .addClass('autocomplete-wrapper')
+        .insertBefore(ac)
+        .append(ac);
+        
+        var list = $('<div>')
+        .addClass('autocomplete-results')
+        .on('click', '.autocomplete-result', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            selectIndex($(this).data('index'));
+            })
+            .appendTo(wrap);
+            
+            $(document)
+            .on('mouseover', '.autocomplete-result', function(e) {
+                var index = parseInt($(this).data('index'), 10);
+                if (!isNaN(index)) {
+                list.attr('data-highlight', index);
+                }
+                })
+                .on('click', clearResults);
+                
+                function clearResults() {
+                    results = [];
+                    numResults = 0;
+                    list.empty();
+                }
+    
+    function selectIndex(index) {
+        
+        if (results.length >= index + 1) {
+            //console.log(results[index])
+            ac.val(results[index].iata);
+            clearResults();
+        }
+    }
+    
+    var results = [];
+    var numResults = 0;
+    var selectedIndex = -1;
+    
+    function search(e) {
+        if (e.which === 38 || e.which === 13 || e.which === 40) {
+            return;
+        }
+        
+        if (ac.val().length > 0) {
+            results = _.take(fuse.search(ac.val()), 7);
+            numResults = results.length;
+            
+            var divs = results.map(function(r, i) {
+                                   return '<div class="autocomplete-result" data-index="' + i + '">' +
+                                   '<div><b>' + r.iata + '</b> - ' + r.name + '</div>' +
+                                   '<div class="autocomplete-location">' + r.city + ', ' + r.country + '</div>' +
+                                   '</div>';
+                                   });
+                                   
+                                   selectedIndex = -1;
+                                   list.html(divs.join(''))
+                                   .attr('data-highlight', selectedIndex);
+                                   
+        } else {
+            numResults = 0;
+            list.empty();
+        }
+    }
+    
+    function onKeyDown(e) {
+        switch (e.which) {
+            case 38: // up
+            selectedIndex--;
+            if (selectedIndex <= -1) {
+                selectedIndex = -1;
+            }
+            list.attr('data-highlight', selectedIndex);
+            break;
+            case 13: // enter
+            selectIndex(selectedIndex);
+            break;
+            case 9: // enter
+            selectIndex(selectedIndex);
+            e.stopPropagation();
+            return;
+            case 40: // down
+            selectedIndex++;
+            if (selectedIndex >= numResults) {
+                selectedIndex = numResults - 1;
+            }
+            list.attr('data-highlight', selectedIndex);
+            break;
+            
+            default:
+            return; // exit this handler for other keys
+        }
+        e.stopPropagation();
+        e.preventDefault(); // prevent the default action (scroll / move caret)
+    }
+    
+    
+    var ac_to = $('.autocomplete_to') //here
+    .on('click', function(e) {
+        e.stopPropagation();
+        })
+        .on('focus keyup', search_to)
+        .on('keydown', onKeyDown_to);
+        
+        var wrap_to = $('<div>')
+        .addClass('autocomplete-wrapper')
+        .insertBefore(ac_to)
+        .append(ac_to);
+        
+        var list_to = $('<div>')
+        .addClass('autocomplete-results_to')
+        .on('click', '.autocomplete-result', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            selectIndex_to($(this).data('index'));
+            })
+            .appendTo(wrap_to);
+            
+            $(document)
+            .on('mouseover', '.autocomplete-result', function(e) {
+                var index = parseInt($(this).data('index'), 10);
+                if (!isNaN(index)) {
+                list_to.attr('data-highlight', index);
+                }
+                })
+                .on('click', clearResults_to);
+                
+                function clearResults_to() {
+                    results = [];
+                    numResults = 0;
+                    list_to.empty();
+                }
+    
+    function selectIndex_to(index) { //here
+        if (results.length >= index + 1) {
+            ac_to.val(results[index].iata);
+            clearResults_to();
+        }
+    }
+    
+    var results = [];
+    var numResults = 0;
+    var selectedIndex = -1;
+    
+    function search_to(e) {
+        if (e.which === 38 || e.which === 13 || e.which === 40) {
+            return;
+        }
+        
+        if (ac_to.val().length > 0) {
+            results = _.take(fuse.search(ac_to.val()), 7);
+            numResults = results.length;
+            
+            var divs = results.map(function(r, i) {
+                                   return '<div class="autocomplete-result" data-index="' + i + '">' +
+                                   '<div><b>' + r.iata + '</b> - ' + r.name + '</div>' +
+                                   '<div class="autocomplete-location">' + r.city + ', ' + r.country + '</div>' +
+                                   '</div>';
+                                   });
+                                   
+                                   selectedIndex = -1;
+                                   list_to.html(divs.join(''))
+                                   .attr('data-highlight', selectedIndex);
+                                   
+        } else {
+            numResults = 0;
+            list_to.empty();
+        }
+    }
+    
+    function onKeyDown_to(e) {
+        switch (e.which) {
+            case 38: // up
+            selectedIndex--;
+            if (selectedIndex <= -1) {
+                selectedIndex = -1;
+            }
+            list_to.attr('data-highlight', selectedIndex_to);
+            break;
+            case 13: // enter
+            selectIndex_to(selectedIndex);
+            break;
+            case 9: // enter
+            selectIndex_to(selectedIndex);
+            e.stopPropagation();
+            return;
+            case 40: // down
+            selectedIndex++;
+            if (selectedIndex >= numResults) {
+                selectedIndex = numResults - 1;
+            }
+            list_to.attr('data-highlight', selectIndex_to);
+            break;
+            
+            default:
+            return; // exit this handler for other keys
+        }
+        e.stopPropagation();
+        e.preventDefault(); // prevent the default action (scroll / move caret)
+    }
+    
+    
+    $(".autocomplete_from").click(function() {
+                                  list_to.empty();
+                                  });
+                                  $(".autocomplete_to").click(function() {
+                                                              list.empty();
+                                                              
+                                                              });
+                                                              
+                                                              
+                                                              
+                                                              $("#search_btn").click(function() {
+                                                                                     var flight_endpoint = "https://api.sandbox.amadeus.com/v1.2/flights/low-fare-search?"
+                                                                                     var from = $(".autocomplete_from").val()
+                                                                                     var to = $(".autocomplete_to").val()
+                                                                                     var range_picker = $("#range-picker").val();
+                                                                                     var date_picker = $("#date-picker").val();
+                                                                                     
+                                                                                     //check if any of the filds are empty
+                                                                                     // if empty return
+                                                                                     if (from === "") {
+                                                                                     alert("Please Enter a valid departure location")
+                                                                                     return false;
+                                                                                     }
+                                                                                     if (to === "") {
+                                                                                     alert("Please Enter a valid arrival location")
+                                                                                     return false;
+                                                                                     }
+                                                                                     if (!one_way_bool & range_picker === "") {
+                                                                                     alert("Please Enter a valid date")
+                                                                                     return false;
+                                                                                     }
+                                                                                     if (one_way_bool & date_picker === "") {
+                                                                                     alert("Please Enter a valid date")
+                                                                                     return false;
+                                                                                     }
+                                                                                     
+                                                                                     
+                                                                                     $("#loader").show()
+                                                                                     
+                                                                                     $("#disp_result").empty()
+                                                                                     $("#main").css({
+                                                                                                    "top": "-10px"
+                                                                                                    })
+                                                                                     
+                                                                                     flight_endpoint += "origin=" + from;
+                                                                                     flight_endpoint += "&destination=" + to;
+                                                                                     
+                                                                                     if (one_way_bool) {
+                                                                                     flight_endpoint += "&departure_date=20" + date_picker;
+                                                                                     } else {
+                                                                                     var dep_date = range_picker.slice(0, 8)
+                                                                                     var ret_date = range_picker.slice(12, 20)
+                                                                                     flight_endpoint += "&departure_date=20" + dep_date + "&return_date=20" + ret_date;
+                                                                                     }
+                                                                                     
+                                                                                     flight_endpoint += "&number_of_results=7&apikey=z18MY7Pcm4XtewNMVFYPXYe0cOVBc7tF";
+                                                                                     
+                                                                                     
+                                                                                     getResponse(flight_endpoint)
+                                                                                     
+                                                                                     })
+                                                                                     
+                                                                                     
+                                                                                     
+                                                                                     
+                                                                                     //var flight_endpoint = "https://api.sandbox.amadeus.com/v1.2/flights/low-fare-search?origin=IST&destination=ADD&departure_date=2018-10-15&return_date=2018-10-21&number_of_results=3&apikey=z18MY7Pcm4XtewNMVFYPXYe0cOVBc7tF"; 
+                                                                                     
+                                                                                     
+                                                                                     
+                                                                                     
+                                                                                     function getResponse(url) {
+                                                                                         
+                                                                                         var settings = {
+                                                                                             success: function(data, textStatus, jqXHR) {
+                                                                                                 //data = JSON.parse(data)
+                                                                                                 $("#loader").hide()
+                                                                                                 
+                                                                                                 if (one_way_bool) {
+                                                                                                     
+                                                                                                     one_way_display(data)
+                                                                                                 } else {
+                                                                                                     round_trip_display(data)
+                                                                                                 }
+                                                                                                 
+                                                                                             },
+                                                                                             error: function() {}
+                                                                                         }
+                                                                                         
+                                                                                         jQuery.ajax(url, settings);
+                                                                                     }
+    
+    
+    
+    function one_way_display(data) {
+        $("#main").append("<table id=\"disp_result\"></table>")
+        $("#disp_result").append("<tr><th>Departure time</th><th>Arrival time</th><th>Route</th><th>Price</th><th>Remaining Seat</th></tr>")
+        
+        
+        for (var i = 0; i <= data.results.length; i++) {
+            var airport_string = ""
+            var airport_arr = []
+            var remaining_seat = 100;
+            var price = 0;
+            var depart_time = "";
+            var arrival_time = "";
+            depart_time = data.results[i].itineraries[0].outbound.flights[0].departs_at;
+            d = new Date(depart_time)
+            depart_time = d.toTimeString()
+            data.results[i].itineraries[0].outbound.flights.forEach(function(currentvalue, index, arr) {
+                                                                    airport_arr.push(currentvalue.origin.airport)
+                                                                    airport_arr.push(currentvalue.destination.airport)
+                                                                    airport_arr = jQuery.unique(airport_arr);
+                                                                    price = data.results[i].fare.total_price;
+                                                                    
+                                                                    // update with the smallest seats available
+                                                                    if (remaining_seat > currentvalue.booking_info.seats_remaining) {
+                                                                    remaining_seat = currentvalue.booking_info.seats_remaining;
+                                                                    }
+                                                                    
+                                                                    arrival_time = currentvalue.arrives_at;
+                                                                    })
+                                                                    airport_string = airport_arr.join("-");
+                                                                    var d = new Date(arrival_time)
+                                                                    arrival_time = d.toTimeString()
+                                                                    $("#disp_result").append("<tr><td>" + depart_time + "</td><td>" + arrival_time + "</td><td>" + airport_string + "</td><td>" + price + data.currency + "<td>" + remaining_seat + "</td></tr>")
+        }
+        
+    }
+    
+    function round_trip_display(data) {
+        
+        $("#main").append("<table id=\"disp_result\"></table>")
+        $("#disp_result").append("<tr><th>Departure time(Out)</th><th>Arrival time(Out)</th><th>Departure time(in)</th><th>Arrival time(in)</th><th>Route(out)</th><th>Route(in)</th><th>Price</th><th>Remaining Seat</th></tr>")
+        $("table").css({
+                       "width": "900px"
+                       })
+                       
+                       var d;
+                       for (var i = 0; i <= data.results.length; i++) {
+                           var airport_string_out = ""
+                           var airport_arr_out = []
+                           var remaining_seat = 100;
+                           var price = 0;
+                           var depart_time_out = "";
+                           var arrival_time_out = "";
                            
                            
-                           })
-   
-   
-   });
-   
-   
-   
-   var options = {
-       shouldSort: true,
-       threshold: 0.4,
-       maxPatternLength: 32,
-       keys: [{
-              name: 'iata',
-              weight: 0.5
-              }, {
-              name: 'name',
-              weight: 0.3
-              }, {
-              name: 'city',
-              weight: 0.2
-              }]
-   };
-
-var fuse = new Fuse(airports, options)
-
-
-var ac = $('.autocomplete_from')
-.on('click', function(e) {
-    e.stopPropagation();
-    })
-    .on('focus keyup', search)
-    .on('keydown', onKeyDown);
-    
-    var wrap = $('<div>')
-    .addClass('autocomplete-wrapper')
-    .insertBefore(ac)
-    .append(ac);
-    
-    var list = $('<div>')
-    .addClass('autocomplete-results')
-    .on('click', '.autocomplete-result', function(e) {
-        e.preventDefault();
-        e.stopPropagation();
-        selectIndex($(this).data('index'));
-        })
-        .appendTo(wrap);
-        
-        $(document)
-        .on('mouseover', '.autocomplete-result', function(e) {
-            var index = parseInt($(this).data('index'), 10);
-            if (!isNaN(index)) {
-            list.attr('data-highlight', index);
-            }
-            })
-            .on('click', clearResults);
-            
-            function clearResults() {
-                results = [];
-                numResults = 0;
-                list.empty();
-            }
-
-function selectIndex(index) {
-    
-    if (results.length >= index + 1) {
-        ac.val(results[index].iata);
-        clearResults();
-    }
-}
-
-var results = [];
-var numResults = 0;
-var selectedIndex = -1;
-
-function search(e) {
-    if (e.which === 38 || e.which === 13 || e.which === 40) {
-        return;
+                           var airport_string_in = ""
+                           var airport_arr_in = []
+                           var depart_time_in = "";
+                           var arrival_time_in = "";
+                           
+                           
+                           depart_time_out = data.results[i].itineraries[0].outbound.flights[0].departs_at;
+                           d = new Date(depart_time_out)
+                           depart_time_out = d.toTimeString()
+                           data.results[i].itineraries[0].outbound.flights.forEach(function(currentvalue, index, arr) {
+                                                                                   airport_arr_out.push(currentvalue.origin.airport)
+                                                                                   airport_arr_out.push(currentvalue.destination.airport)
+                                                                                   airport_arr_out = jQuery.unique(airport_arr_out);
+                                                                                   price = data.results[i].fare.total_price;
+                                                                                   
+                                                                                   // update with the smallest seats available
+                                                                                   if (remaining_seat > currentvalue.booking_info.seats_remaining) {
+                                                                                   remaining_seat = currentvalue.booking_info.seats_remaining;
+                                                                                   }
+                                                                                   
+                                                                                   arrival_time_out = currentvalue.arrives_at;
+                                                                                   })
+                                                                                   airport_string_out = airport_arr_out.join("-");
+                                                                                   d = new Date(arrival_time_out)
+                                                                                   arrival_time_out = d.toTimeString()
+                                                                                   
+                                                                                   //inbound
+                                                                                   
+                                                                                   depart_time_in = data.results[i].itineraries[0].inbound.flights[0].departs_at;
+                                                                                   d = new Date(depart_time_in)
+                                                                                   depart_time_in = d.toTimeString()
+                                                                                   data.results[i].itineraries[0].inbound.flights.forEach(function(currentvalue, index, arr) {
+                                                                                                                                          airport_arr_in.push(currentvalue.origin.airport)
+                                                                                                                                          airport_arr_in.push(currentvalue.destination.airport)
+                                                                                                                                          airport_arr_in = jQuery.unique(airport_arr_in);
+                                                                                                                                          
+                                                                                                                                          // update with the smallest seats available
+                                                                                                                                          if (remaining_seat > currentvalue.booking_info.seats_remaining) {
+                                                                                                                                          remaining_seat = currentvalue.booking_info.seats_remaining;
+                                                                                                                                          }
+                                                                                                                                          
+                                                                                                                                          arrival_time_in = currentvalue.arrives_at;
+                                                                                                                                          })
+                                                                                                                                          airport_string_in = airport_arr_in.join("-");
+                                                                                                                                          d = new Date(arrival_time_in)
+                                                                                                                                          arrival_time_in = d.toTimeString()
+                                                                                                                                          
+                                                                                                                                          
+                                                                                                                                          
+                                                                                                                                          
+                                                                                                                                          $("#disp_result").append("<tr><td>" + depart_time_out + "</td><td>" + arrival_time_out + "</td><td>" + depart_time_in + "</td><td>" + arrival_time_in + "</td><td>" + airport_string_out + "</td><td>" + airport_string_in + "</td><td>" + price + data.currency + "<td>" + remaining_seat + "</td></tr>")
+                       }
+                       
     }
     
-    if (ac.val().length > 0) {
-        results = _.take(fuse.search(ac.val()), 7);
-        numResults = results.length;
-        
-        var divs = results.map(function(r, i) {
-                               return '<div class="autocomplete-result" data-index="'+ i +'">'
-                               + '<div><b>'+ r.iata +'</b> - '+ r.name +'</div>'
-                               + '<div class="autocomplete-location">'+ r.city +', '+ r.country +'</div>'
-                               + '</div>';
-                               });
-                               
-                               selectedIndex = -1;
-                               list.html(divs.join(''))
-                               .attr('data-highlight', selectedIndex);
-                               
-    } else {
-        numResults = 0;
-        list.empty();
-    }
-}
-
-function onKeyDown(e) {
-    switch(e.which) {
-        case 38: // up
-        selectedIndex--;
-        if (selectedIndex <= -1) {
-            selectedIndex = -1;
-        }
-        list.attr('data-highlight', selectedIndex);
-        break;
-        case 13: // enter
-        selectIndex(selectedIndex);
-        break;
-        case 9: // enter
-        selectIndex(selectedIndex);
-        e.stopPropagation();
-        return;
-        case 40: // down
-        selectedIndex++;
-        if (selectedIndex >= numResults) {
-            selectedIndex = numResults-1;
-        }
-        list.attr('data-highlight', selectedIndex);
-        break;
-        
-        default: return; // exit this handler for other keys
-    }
-    e.stopPropagation();
-    e.preventDefault(); // prevent the default action (scroll / move caret)
-}
-
-
-var ac_to = $('.autocomplete_to')//here
-.on('click', function(e) {
-    e.stopPropagation();
-    })
-    .on('focus keyup', search_to)
-    .on('keydown', onKeyDown_to);
     
-    var wrap_to = $('<div>')
-    .addClass('autocomplete-wrapper')
-    .insertBefore(ac_to)
-    .append(ac_to);
     
-    var list_to = $('<div>')
-    .addClass('autocomplete-results_to')
-    .on('click', '.autocomplete-result', function(e) {
-        e.preventDefault();
-        e.stopPropagation();
-        selectIndex_to($(this).data('index'));
-        })
-        .appendTo(wrap_to);
-        
-        $(document)
-        .on('mouseover', '.autocomplete-result', function(e) {
-            var index = parseInt($(this).data('index'), 10);
-            if (!isNaN(index)) {
-            list_to.attr('data-highlight', index);
-            }
-            })
-            .on('click', clearResults_to);
-            
-            function clearResults_to() {
-                results = [];
-                numResults = 0;
-                list_to.empty();
-            }
-
-function selectIndex_to(index) { //here
-    if (results.length >= index + 1) {
-        ac_to.val(results[index].iata);
-        clearResults_to();
-    }  
-}
-
-var results = [];
-var numResults = 0;
-var selectedIndex = -1;
-
-function search_to(e) {
-    if (e.which === 38 || e.which === 13 || e.which === 40) {
-        return;
-    }
+    //rescoures:https://codepen.io/jessegavin/pen/ALpOvr
+    // .       https://codepen.io/jackrugile/pen/EyABe
     
-    if (ac_to.val().length > 0) {
-        results = _.take(fuse.search(ac_to.val()), 7);
-        numResults = results.length;
-        
-        var divs = results.map(function(r, i) {
-                               return '<div class="autocomplete-result" data-index="'+ i +'">'
-                               + '<div><b>'+ r.iata +'</b> - '+ r.name +'</div>'
-                               + '<div class="autocomplete-location">'+ r.city +', '+ r.country +'</div>'
-                               + '</div>';
-                               });
-                               
-                               selectedIndex = -1;
-                               list_to.html(divs.join(''))
-                               .attr('data-highlight', selectedIndex);
-                               
-    } else {
-        numResults = 0;
-        list_to.empty();
-    }
-}
-
-function onKeyDown_to(e) {
-    switch(e.which) {
-        case 38: // up
-        selectedIndex--;
-        if (selectedIndex <= -1) {
-            selectedIndex = -1;
-        }
-        list_to.attr('data-highlight', selectedIndex_to);
-        break;
-        case 13: // enter
-        selectIndex_to(selectedIndex);
-        break;
-        case 9: // enter
-        selectIndex_to(selectedIndex);
-        e.stopPropagation();
-        return;
-        case 40: // down
-        selectedIndex++;
-        if (selectedIndex >= numResults) {
-            selectedIndex = numResults-1;
-        }
-        list_to.attr('data-highlight', selectIndex_to);
-        break;
-        
-        default: return; // exit this handler for other keys
-    }
     
-    e.stopPropagation();
-    e.preventDefault(); // prevent the default action (scroll / move caret)
-}
-
-
-$(".autocomplete_from" ).click(function() {
-                               list_to.empty();
-                               });
-                               $(".autocomplete_to" ).click(function() {
-                                                            list.empty();
-                                                            });
-                                                            
-                                                            
-                                                            
-                                                            //rescoures:https://codepen.io/jessegavin/pen/ALpOvr
- 
- 
-    </script>
+    
+        </script>
