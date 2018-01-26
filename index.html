@@ -237,128 +237,116 @@
     <script>
         
     
-    //https://images.unsplash.com/photo-1495822892661-2ead864e1c7b?auto=format&fit=crop&w=2689&q=80
-    //https://images.unsplash.com/photo-1490380169520-0a4b88d52565?auto=format&fit=crop&w=1950&q=80
-    //https://images.unsplash.com/photo-1499561385668-5ebdb06a79bc?auto=format&fit=crop&w=1949&q=80
-    //Using jQuery on my actual project, but this could've
-    //been rewritten without it
     var one_way_bool = true;
     
-    
+    //main function
     $(function() {
       
       $("#loader").hide()
       
-      
+      // one way button click function
       $(".one_way_btn").click(function() {
-                              $(".one_way_btn").css({
-                                                    "background-color": "black",
-                                                    "color": "white"
-                                                    });
-                              $(".round_trip_btn").css({
-                                                       "background-color": "transparent",
-                                                       "color": "black"
-                                                       });
+          // adjust the input field css
+               $(".one_way_btn").css({
+                        "background-color": "black",
+                         "color": "white"
+                          });
+                $(".round_trip_btn").css({
+                          "background-color": "transparent",
+                          "color": "black"
+                          });
+                              
+                $("#date-picker").css({
+                          "position": "absolute",
+                           "width": "200px",
+                           "color": "white",
+                           "left": "445px"
+                           });
+                $("#from_auto").css({
+                           "width": "200px",
+                            "color": "white",
+                            "left": "0px"
+                            });
+                 $("#to_auto").css({
+                            "width": "200px",
+                             "color": "white",
+                             "left": "235px"
+                            });
+                              
+                 $("#search_btn").css({
+                             "left": "670px"
+                           });
                               
                               
-                              one_way_bool = true;
-                              
-                              $("#date-picker").css({
-                                                    "position": "absolute",
-                                                    "width": "200px",
-                                                    "color": "white",
-                                                    "left": "445px"
-                                                    });
-                              $("#from_auto").css({
-                                                  "width": "200px",
-                                                  "color": "white",
-                                                  "left": "0px"
-                                                  });
-                              $("#to_auto").css({
-                                                "width": "200px",
-                                                "color": "white",
-                                                "left": "235px"
-                                                });
-                              
-                              $("#search_btn").css({
-                                                   "left": "670px"
-                                                   });
-                              
-                              
-                              
-                              
-                              $(".datepicker-input").show()
-                              $(".daterangepicker-input").hide()
-                              $(".datepicker-input").empty()
-                              $(".daterangepicker-input").empty()
-                              $(".datepicker-input").each(function(i) {
-                                                          flatpickr("#" + this.id, {
-                                                                    allowInput: true,
-                                                                    enableTime: false,
-                                                                    dateFormat: "y-m-d"
-                                                                    });
-                                                          
-                                                          });
-                              
-                              });
-      $(".round_trip_btn").click(function() {
-                                 one_way_bool = false;
-                                 $(".round_trip_btn").css({
-                                                          "background-color": "black",
-                                                          "color": "white"
-                                                          });
-                                 
-                                 //adjust positions of input and button tag
-                                 $("#range-picker").css({
-                                                        "position": "absolute",
-                                                        "width": "390px",
-                                                        "color": "white",
-                                                        "left": "360px"
-                                                        });
-                                 $("#from_auto").css({
-                                                     "width": "150px",
-                                                     "color": "white",
-                                                     "left": "0px"
-                                                     });
-                                 $("#to_auto").css({
-                                                   "width": "180px",
-                                                   "color": "white",
-                                                   "left": "170px"
-                                                   });
-                                 
-                                 $("#search_btn").css({
-                                                      "left": "760px"
-                                                      });
-                                 
-                                 
-                                 
-                                 
-                                 $(".one_way_btn").css({
-                                                       "background-color": "transparent",
-                                                       "color": "black"
-                                                       });
-                                 $(".daterangepicker-input").attr("placeholder", "Date")
-                                 $(".datepicker-input ").hide()
-                                 $(".daterangepicker-input").show()
-                                 $(".daterangepicker-input").empty()
-                                 $(".datepicker-input").empty()
-                                 $(".daterangepicker-input").each(function(i) {
-                                                                  flatpickr("#" + this.id, {
-                                                                            allowInput: true, //On or off doesn't change error
-                                                                            enableTime: false,
-                                                                            dateFormat: "y-m-d",
-                                                                            mode: "range"
-                                                                            });
-                                                                  
-                                                                  
-                                                                  });
-                                 
-                                 });
+                  $(".datepicker-input").show()
+                  $(".daterangepicker-input").hide()
+                  $(".datepicker-input").empty()
+                  $(".daterangepicker-input").empty()
+                  $(".datepicker-input").each(function(i) {
+                                 flatpickr("#" + this.id, {
+                                          allowInput: true,
+                                          enableTime: false,
+                                          dateFormat: "y-m-d"
+                                          });
+                               });
+          
+          });
       
-      });
+        // round trip buton function
+       
+        $(".round_trip_btn").click(function() {
+            // adjust the input field css
+                one_way_bool = false;
+                $(".round_trip_btn").css({
+                               "background-color": "black",
+                                "color": "white"
+                         });
+                $("#range-picker").css({
+                              "position": "absolute",
+                              "width": "390px",
+                               "color": "white",
+                               "left": "360px"
+                           });
+                 $("#from_auto").css({
+                              "width": "150px",
+                              "color": "white",
+                               "left": "0px"
+                            });
+                 $("#to_auto").css({
+                               "width": "180px",
+                                "color": "white",
+                                "left": "170px"
+                             });
+                                 
+                 $("#search_btn").css({
+                              "left": "760px"
+                           });
+                                 
+                                 
+                   $(".one_way_btn").css({
+                              "background-color": "transparent",
+                              "color": "black"
+                            });
+                   $(".daterangepicker-input").attr("placeholder", "Date")
+                   $(".datepicker-input ").hide()
+                   $(".daterangepicker-input").show()
+                   $(".daterangepicker-input").empty()
+                   $(".datepicker-input").empty()
+                   $(".daterangepicker-input").each(function(i) {
+                                  flatpickr("#" + this.id, {
+                                            allowInput: true, //On or off doesn't change error
+                                            enableTime: false,
+                                            dateFormat: "y-m-d",
+                                            mode: "range"
+                                        });
+                                  });
+                                 
+                          });
+      
+                   });
       
       
-      
+      //options for airports autocomplete
       var options = {
           shouldSort: true,
           threshold: 0.4,
@@ -377,7 +365,7 @@
     
     var fuse = new Fuse(airports, options)
     
-    
+    //autocmplete from input
     var ac = $('.autocomplete_from')
     .on('click', function(e) {
         e.stopPropagation();
@@ -390,6 +378,7 @@
         .insertBefore(ac)
         .append(ac);
         
+        // list of the airports
         var list = $('<div>')
         .addClass('autocomplete-results')
         .on('click', '.autocomplete-result', function(e) {
@@ -399,7 +388,7 @@
             })
             .appendTo(wrap);
             
-            $(document)
+         $(document)
             .on('mouseover', '.autocomplete-result', function(e) {
                 var index = parseInt($(this).data('index'), 10);
                 if (!isNaN(index)) {
@@ -413,6 +402,7 @@
                     numResults = 0;
                     list.empty();
                 }
+    
     
     function selectIndex(index) {
         
@@ -484,7 +474,7 @@
         e.preventDefault(); // prevent the default action (scroll / move caret)
     }
     
-    
+    // autocomplete to input field
     var ac_to = $('.autocomplete_to') //here
     .on('click', function(e) {
         e.stopPropagation();
@@ -497,6 +487,7 @@
         .insertBefore(ac_to)
         .append(ac_to);
         
+        //list view
         var list_to = $('<div>')
         .addClass('autocomplete-results_to')
         .on('click', '.autocomplete-result', function(e) {
@@ -591,98 +582,96 @@
     
     
     $(".autocomplete_from").click(function() {
-                                  list_to.empty();
-                                  });
-                                  $(".autocomplete_to").click(function() {
-                                                              list.empty();
-                                                              
-                                                              });
-                                                              
+          list_to.empty();
+          });
+    $(".autocomplete_to").click(function() {
+          list.empty();
+          });
                                                               
                                                               
-                                                              $("#search_btn").click(function() {
-                                                                                     var flight_endpoint = "https://api.sandbox.amadeus.com/v1.2/flights/low-fare-search?"
-                                                                                     var from = $(".autocomplete_from").val()
-                                                                                     var to = $(".autocomplete_to").val()
-                                                                                     var range_picker = $("#range-picker").val();
-                                                                                     var date_picker = $("#date-picker").val();
+                                            
+        // search button function
+   $("#search_btn").click(function() {
+          var flight_endpoint = "https://api.sandbox.amadeus.com/v1.2/flights/low-fare-search?"
+          // get the users input value
+          var from = $(".autocomplete_from").val()
+          var to = $(".autocomplete_to").val()
+          var range_picker = $("#range-picker").val();
+          var date_picker = $("#date-picker").val();
                                                                                      
-                                                                                     //check if any of the filds are empty
-                                                                                     // if empty return
-                                                                                     if (from === "") {
-                                                                                     alert("Please Enter a valid departure location")
-                                                                                     return false;
-                                                                                     }
-                                                                                     if (to === "") {
-                                                                                     alert("Please Enter a valid arrival location")
-                                                                                     return false;
-                                                                                     }
-                                                                                     if (!one_way_bool & range_picker === "") {
-                                                                                     alert("Please Enter a valid date")
-                                                                                     return false;
-                                                                                     }
-                                                                                     if (one_way_bool & date_picker === "") {
-                                                                                     alert("Please Enter a valid date")
-                                                                                     return false;
-                                                                                     }
-                                                                                     
-                                                                                     
-                                                                                     $("#loader").show()
-                                                                                     
-                                                                                     $("#disp_result").empty()
-                                                                                     $("#main").css({
-                                                                                                    "top": "-10px"
-                                                                                                    })
-                                                                                     
-                                                                                     flight_endpoint += "origin=" + from;
-                                                                                     flight_endpoint += "&destination=" + to;
-                                                                                     
-                                                                                     if (one_way_bool) {
-                                                                                     flight_endpoint += "&departure_date=20" + date_picker;
-                                                                                     } else {
-                                                                                     var dep_date = range_picker.slice(0, 8)
-                                                                                     var ret_date = range_picker.slice(12, 20)
-                                                                                     flight_endpoint += "&departure_date=20" + dep_date + "&return_date=20" + ret_date;
-                                                                                     }
-                                                                                     
-                                                                                     flight_endpoint += "&number_of_results=7&apikey=z18MY7Pcm4XtewNMVFYPXYe0cOVBc7tF";
+          //check if any of the filds are empty
+          // if empty return false and alert the user
+          if (from === "") {
+              alert("Please Enter a valid departure location")
+              return false;
+           }
+           if (to === "") {
+             alert("Please Enter a valid arrival location")
+             return false;
+           }
+           if (!one_way_bool & range_picker === "") {
+              alert("Please Enter a valid date")
+              return false;
+           }
+           if (one_way_bool & date_picker === "") {
+              alert("Please Enter a valid date")
+              return false;
+           }
                                                                                      
                                                                                      
-                                                                                     getResponse(flight_endpoint)
+           $("#loader").show()
                                                                                      
-                                                                                     })
+           $("#disp_result").empty()
+           $("#main").css({
+                   "top": "-10px"
+                   })
+                         
+       
+           // append the input values to the url
+           flight_endpoint += "origin=" + from;
+           flight_endpoint += "&destination=" + to;
+                                                                                     
+           if (one_way_bool) {
+               flight_endpoint += "&departure_date=20" + date_picker;
+            } else {
+               var dep_date = range_picker.slice(0, 8)
+               var ret_date = range_picker.slice(12, 20)
+               flight_endpoint += "&departure_date=20" + dep_date + "&return_date=20" + ret_date;
+            }
+                                                                                     
+               light_endpoint += "&number_of_results=7&apikey=z18MY7Pcm4XtewNMVFYPXYe0cOVBc7tF";
+                                                                                     
+                                                                                     
+               getResponse(flight_endpoint)
+                                                                                     
+          })
                                                                                      
                                                                                      
                                                                                      
-                                                                                     
-                                                                                     //var flight_endpoint = "https://api.sandbox.amadeus.com/v1.2/flights/low-fare-search?origin=IST&destination=ADD&departure_date=2018-10-15&return_date=2018-10-21&number_of_results=3&apikey=z18MY7Pcm4XtewNMVFYPXYe0cOVBc7tF"; 
-                                                                                     
-                                                                                     
-                                                                                     
-                                                                                     
-                                                                                     function getResponse(url) {
+         // ajax request function                                                                          
+          // input: url                                                                           
+         function getResponse(url) {
                                                                                          
-                                                                                         var settings = {
-                                                                                             success: function(data, textStatus, jqXHR) {
-                                                                                                 //data = JSON.parse(data)
-                                                                                                 $("#loader").hide()
+               var settings = {
+                         success: function(data, textStatus, jqXHR) {
+                         //data = JSON.parse(data)
+                                  $("#loader").hide()
                                                                                                  
-                                                                                                 if (one_way_bool) {
-                                                                                                     
-                                                                                                     one_way_display(data)
-                                                                                                 } else {
-                                                                                                     round_trip_display(data)
-                                                                                                 }
-                                                                                                 
-                                                                                             },
-                                                                                             error: function() {}
-                                                                                         }
+                                   if (one_way_bool) {
+                                     one_way_display(data)
+                                   } else {
+                                       round_trip_display(data)
+                                   }
+                                 },
+                         error: function() {}
+                       }
                                                                                          
-                                                                                         jQuery.ajax(url, settings);
-                                                                                     }
+               jQuery.ajax(url, settings);
+          }
     
     
-    
+    // one way display function
+    // input: response data
     function one_way_display(data) {
         $("#main").append("<table id=\"disp_result\"></table>")
         $("#disp_result").append("<tr><th>Departure time</th><th>Arrival time</th><th>Route</th><th>Price</th><th>Remaining Seat</th></tr>")
@@ -698,23 +687,25 @@
             depart_time = data.results[i].itineraries[0].outbound.flights[0].departs_at;
             d = new Date(depart_time)
             depart_time = d.toTimeString()
+            
+            // loop through the data and form the table
             data.results[i].itineraries[0].outbound.flights.forEach(function(currentvalue, index, arr) {
-                                                                    airport_arr.push(currentvalue.origin.airport)
-                                                                    airport_arr.push(currentvalue.destination.airport)
-                                                                    airport_arr = jQuery.unique(airport_arr);
-                                                                    price = data.results[i].fare.total_price;
+                         airport_arr.push(currentvalue.origin.airport)
+                         airport_arr.push(currentvalue.destination.airport)
+                         airport_arr = jQuery.unique(airport_arr);
+                         price = data.results[i].fare.total_price;
                                                                     
-                                                                    // update with the smallest seats available
-                                                                    if (remaining_seat > currentvalue.booking_info.seats_remaining) {
-                                                                    remaining_seat = currentvalue.booking_info.seats_remaining;
-                                                                    }
+                        //Remaining Seat: update with the smallest seats available
+                         if (remaining_seat > currentvalue.booking_info.seats_remaining) {
+                               remaining_seat = currentvalue.booking_info.seats_remaining;
+                         }
                                                                     
-                                                                    arrival_time = currentvalue.arrives_at;
-                                                                    })
-                                                                    airport_string = airport_arr.join("-");
-                                                                    var d = new Date(arrival_time)
-                                                                    arrival_time = d.toTimeString()
-                                                                    $("#disp_result").append("<tr><td>" + depart_time + "</td><td>" + arrival_time + "</td><td>" + airport_string + "</td><td>" + price + data.currency + "<td>" + remaining_seat + "</td></tr>")
+                        arrival_time = currentvalue.arrives_at;
+                         })
+                        airport_string = airport_arr.join("-");
+                        var d = new Date(arrival_time)
+                        arrival_time = d.toTimeString()
+                        $("#disp_result").append("<tr><td>" + depart_time + "</td><td>" + arrival_time + "</td><td>" + airport_string + "</td><td>" + price + data.currency + "<td>" + remaining_seat + "</td></tr>")
         }
         
     }
@@ -727,68 +718,69 @@
                        "width": "900px"
                        })
                        
-                       var d;
-                       for (var i = 0; i <= data.results.length; i++) {
-                           var airport_string_out = ""
-                           var airport_arr_out = []
-                           var remaining_seat = 100;
-                           var price = 0;
-                           var depart_time_out = "";
-                           var arrival_time_out = "";
+        var d;
+        for (var i = 0; i <= data.results.length; i++) {
+             var airport_string_out = ""
+             var airport_arr_out = []
+             var remaining_seat = 100;
+             var price = 0;
+             var depart_time_out = "";
+             var arrival_time_out = "";
                            
                            
-                           var airport_string_in = ""
-                           var airport_arr_in = []
-                           var depart_time_in = "";
-                           var arrival_time_in = "";
+             var airport_string_in = ""
+             var airport_arr_in = []
+             var depart_time_in = "";
+             var arrival_time_in = "";
                            
                            
-                           depart_time_out = data.results[i].itineraries[0].outbound.flights[0].departs_at;
-                           d = new Date(depart_time_out)
-                           depart_time_out = d.toTimeString()
-                           data.results[i].itineraries[0].outbound.flights.forEach(function(currentvalue, index, arr) {
-                                                                                   airport_arr_out.push(currentvalue.origin.airport)
-                                                                                   airport_arr_out.push(currentvalue.destination.airport)
-                                                                                   airport_arr_out = jQuery.unique(airport_arr_out);
-                                                                                   price = data.results[i].fare.total_price;
+             depart_time_out = data.results[i].itineraries[0].outbound.flights[0].departs_at;
+             d = new Date(depart_time_out)
+             depart_time_out = d.toTimeString()
+                           // loop through the data and form the table
+             data.results[i].itineraries[0].outbound.flights.forEach(function(currentvalue, index, arr) {
+                            airport_arr_out.push(currentvalue.origin.airport)
+                            airport_arr_out.push(currentvalue.destination.airport)
+                            airport_arr_out = jQuery.unique(airport_arr_out);
+                            price = data.results[i].fare.total_price;
                                                                                    
-                                                                                   // update with the smallest seats available
-                                                                                   if (remaining_seat > currentvalue.booking_info.seats_remaining) {
-                                                                                   remaining_seat = currentvalue.booking_info.seats_remaining;
-                                                                                   }
+                           // update with the smallest seats available
+                           if (remaining_seat > currentvalue.booking_info.seats_remaining) {
+                                  remaining_seat = currentvalue.booking_info.seats_remaining;
+                            }
                                                                                    
-                                                                                   arrival_time_out = currentvalue.arrives_at;
-                                                                                   })
-                                                                                   airport_string_out = airport_arr_out.join("-");
-                                                                                   d = new Date(arrival_time_out)
-                                                                                   arrival_time_out = d.toTimeString()
+                            arrival_time_out = currentvalue.arrives_at;
+                     })
+                         airport_string_out = airport_arr_out.join("-");
+                         d = new Date(arrival_time_out)
+                         arrival_time_out = d.toTimeString()
                                                                                    
-                                                                                   //inbound
+                         //inbound
                                                                                    
-                                                                                   depart_time_in = data.results[i].itineraries[0].inbound.flights[0].departs_at;
-                                                                                   d = new Date(depart_time_in)
-                                                                                   depart_time_in = d.toTimeString()
-                                                                                   data.results[i].itineraries[0].inbound.flights.forEach(function(currentvalue, index, arr) {
-                                                                                                                                          airport_arr_in.push(currentvalue.origin.airport)
-                                                                                                                                          airport_arr_in.push(currentvalue.destination.airport)
-                                                                                                                                          airport_arr_in = jQuery.unique(airport_arr_in);
-                                                                                                                                          
-                                                                                                                                          // update with the smallest seats available
-                                                                                                                                          if (remaining_seat > currentvalue.booking_info.seats_remaining) {
-                                                                                                                                          remaining_seat = currentvalue.booking_info.seats_remaining;
-                                                                                                                                          }
-                                                                                                                                          
-                                                                                                                                          arrival_time_in = currentvalue.arrives_at;
-                                                                                                                                          })
-                                                                                                                                          airport_string_in = airport_arr_in.join("-");
-                                                                                                                                          d = new Date(arrival_time_in)
-                                                                                                                                          arrival_time_in = d.toTimeString()
-                                                                                                                                          
-                                                                                                                                          
-                                                                                                                                          
-                                                                                                                                          
-                                                                                                                                          $("#disp_result").append("<tr><td>" + depart_time_out + "</td><td>" + arrival_time_out + "</td><td>" + depart_time_in + "</td><td>" + arrival_time_in + "</td><td>" + airport_string_out + "</td><td>" + airport_string_in + "</td><td>" + price + data.currency + "<td>" + remaining_seat + "</td></tr>")
-                       }
+                        depart_time_in = data.results[i].itineraries[0].inbound.flights[0].departs_at;
+        d = new Date(depart_time_in)
+        depart_time_in = d.toTimeString()
+        data.results[i].itineraries[0].inbound.flights.forEach(function(currentvalue, index, arr) {
+            airport_arr_in.push(currentvalue.origin.airport)
+            airport_arr_in.push(currentvalue.destination.airport)
+            airport_arr_in = jQuery.unique(airport_arr_in);
+
+            // update with the smallest seats available
+            if (remaining_seat > currentvalue.booking_info.seats_remaining) {
+                remaining_seat = currentvalue.booking_info.seats_remaining;
+            }
+
+            arrival_time_in = currentvalue.arrives_at;
+        })
+        airport_string_in = airport_arr_in.join("-");
+        d = new Date(arrival_time_in)
+        arrival_time_in = d.toTimeString()
+
+
+
+
+        $("#disp_result").append("<tr><td>" + depart_time_out + "</td><td>" + arrival_time_out + "</td><td>" + depart_time_in + "</td><td>" + arrival_time_in + "</td><td>" + airport_string_out + "</td><td>" + airport_string_in + "</td><td>" + price + data.currency + "<td>" + remaining_seat + "</td></tr>")
+    }
                        
     }
     
