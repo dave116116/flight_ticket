@@ -634,7 +634,7 @@
                flight_endpoint += "&departure_date=20" + dep_date + "&return_date=20" + ret_date;
             }
                                                                                      
-               flight_endpoint += "&number_of_results=7&apikey=vCY4BdaIRizqYbfBahqAMOMOd91Uo4fi";
+               flight_endpoint += "&number_of_results=7&apikey=AaBLMPLkk5qBSmNYhICjAGanLxQ5KTpN";
                                                                                      
                                                                                      
                getResponse(flight_endpoint)
@@ -779,6 +779,9 @@
                        
     }
     
+   $( document ).ready(function() {
+        $(".one_way_btn").trigger("click");
+    });
     
     
     //rescoures:
