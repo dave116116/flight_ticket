@@ -232,7 +232,10 @@
     <script>
         
     
-    var one_way_bool = true;
+
+
+
+var one_way_bool = true;
     
     //main function
     $(function() {
@@ -587,7 +590,15 @@
                                             
         // search button function
    $("#search_btn").click(function() {
-          var flight_endpoint = "https://api.sandbox.amadeus.com/v1.2/flights/low-fare-search?"
+          
+      // var flight_api = "http://api.travelpayouts.com/v1/prices/cheap?origin=MOW&destination=HKT&depart_date=2018-11&return_date=2018-12&token=96849e586800e994680e69020bf1fe0c"
+     
+       var flight_api = "https://cors-anywhere.herokuapp.com/https://api.travelpayouts.com/v1/prices/cheap?"
+       //origin=MOW&destination=HKT&depart_date=2018-11&return_date=2018-12&token=96849e586800e994680e69020bf1fe0c" 
+       
+
+
+          
           // get the users input value
           var from = $(".autocomplete_from").val()
           var to = $(".autocomplete_to").val()
@@ -623,22 +634,30 @@
                          
        
            // append the input values to the url
-           flight_endpoint += "origin=" + from;
-           flight_endpoint += "&destination=" + to;
+           flight_api += "origin=" + from;
+           flight_api += "&destination=" + to;
+           
+
                                                                                      
            if (one_way_bool) {
-               flight_endpoint += "&departure_date=20" + date_picker;
+               flight_api += "&depart_date=20" + date_picker;
+
+               
             } else {
+              //origin=MOW&destination=HKT&depart_date=2018-11&return_date=2018-12&token=96849e586800e994680e69020bf1fe0c" 
                var dep_date = range_picker.slice(0, 8)
                var ret_date = range_picker.slice(12, 20)
-               flight_endpoint += "&departure_date=20" + dep_date + "&return_date=20" + ret_date;
+            
+               flight_api += "&departure_date=20" + dep_date + "&return_date=20" + ret_date;
+
+              
+              
             }
-                                                                                     
-               flight_endpoint += "&number_of_results=7&apikey=3v0hgQjrzDgif20WL18I6E0ysEf66gya";
-                                                                                     
-                                                                                     
-               getResponse(flight_endpoint)
-                                                                                     
+               flight_api += "&token=96849e586800e994680e69020bf1fe0c"                                                                      
+
+                       
+               console.log(flight_api)
+               getResponse(flight_api)                                                                     
           })
                                                                                      
                                                                                      
@@ -646,137 +665,161 @@
          // ajax request function                                                                          
           // input: url                                                                           
          function getResponse(url) {
-                                                                                         
-               var settings = {
+                                         
+       
+           
+            var settings = {
                          success: function(data, textStatus, jqXHR) {
                          //data = JSON.parse(data)
-                                  $("#loader").hide()
+                               $("#loader").hide()
                                                                                                  
-                                   if (one_way_bool) {
-                                     one_way_display(data)
+                               if (one_way_bool) {
+                                     
+                                    one_way_display(data,url)
+                                 
                                    } else {
-                                       round_trip_display(data)
+                                     round_trip_display(data,url)
                                    }
                                  },
-                         error: function() {}
-                       }
+                            error: function(xhr, textStatus, error){
+      console.log(xhr.statusText);
+      console.log(textStatus);
+      console.log(error);
+  }
+  }
                                                                                          
-               jQuery.ajax(url, settings);
+             jQuery.ajax(url, settings);
+          }
+
+       function getNotFoundResponse(url) {
+               
+                       
+         
+           
+            var settings = {
+                         success: function(data, textStatus, jqXHR) {
+                         //data = JSON.parse(data)
+                               $("#loader").hide()
+                                                                                                 
+                               if (one_way_bool) {
+                                     
+                                    one_way_display(data,url)
+                                 
+                                   } else {
+                                     round_trip_display(data)
+                                   }
+                                 },
+                            error: function(xhr, textStatus, error){
+      console.log(xhr.statusText);
+      console.log(textStatus);
+      console.log(error);
+  }
+  }
+                                                                                         
+             jQuery.ajax(url, settings);
           }
     
     
     // one way display function
     // input: response data
-    function one_way_display(data) {
-        $("#main").append("<table id=\"disp_result\"></table>")
-        $("#disp_result").append("<tr><th>Departure time</th><th>Arrival time</th><th>Route</th><th>Price</th><th>Remaining Seat</th></tr>")
-        
-        
-        for (var i = 0; i <= data.results.length; i++) {
-            var airport_string = ""
-            var airport_arr = []
-            var remaining_seat = 100;
-            var price = 0;
-            var depart_time = "";
-            var arrival_time = "";
-            depart_time = data.results[i].itineraries[0].outbound.flights[0].departs_at;
-            d = new Date(depart_time)
-            depart_time = d.toTimeString()
+    function one_way_display(data, url) {
+      
+       
+      var isEmpty = Object.keys(data.data).length
+                                  
+          if(!isEmpty){
+             $("#loader").show()
+            alert("No availablity")
+            var url_slice_one = url.slice(0, 128)
+            var url_slice_two = url.slice(131, url.length)
+            var new_url = url_slice_one + url_slice_two
+                                
+            getNotFoundResponse(new_url)       
             
-            // loop through the data and form the table
-            data.results[i].itineraries[0].outbound.flights.forEach(function(currentvalue, index, arr) {
-                         airport_arr.push(currentvalue.origin.airport)
-                         airport_arr.push(currentvalue.destination.airport)
-                         airport_arr = jQuery.unique(airport_arr);
-                         price = data.results[i].fare.total_price;
-                                                                    
-                        //Remaining Seat: update with the smallest seats available
-                         if (remaining_seat > currentvalue.booking_info.seats_remaining) {
-                               remaining_seat = currentvalue.booking_info.seats_remaining;
-                         }
-                                                                    
-                        arrival_time = currentvalue.arrives_at;
-                         })
-                        airport_string = airport_arr.join("-");
-                        var d = new Date(arrival_time)
-                        arrival_time = d.toTimeString()
-                        $("#disp_result").append("<tr><td>" + depart_time + "</td><td>" + arrival_time + "</td><td>" + airport_string + "</td><td>" + price + data.currency + "<td>" + remaining_seat + "</td></tr>")
-        }
+                                    
+          } else {
+           
+           $("#main").append("<table id=\"disp_result\"></table>")
+             $("#disp_result").append("<tr><th>Departure time</th><th>Airline</th><th>Flight Number</th><th>Price</th></tr>")
+            
+            console.log(data.data)
+            
+            
+
+            for(var name in data.data){
+              
+            var data_data = data.data[name];
+             
+              
+            for(var key in data_data){
+                        var d = new Date(data_data[key].departure_at)
+                        departure_date = d.toDateString()
+                        departure_time = d.toTimeString()
+               $("#disp_result").append("<tr><td>" + departure_date + " " + departure_time + "</td><td>" + data_data[key].airline+ "</td><td>" + data_data[key].flight_number+ "</td><td>" + data_data[key].price + "</td></tr>")
+              
+            }
+}
+
+                               
+         }
+      
+      
+      
+      
+        
+       
         
     }
     
-    function round_trip_display(data) {
-        
-        $("#main").append("<table id=\"disp_result\"></table>")
-        $("#disp_result").append("<tr><th>Departure time(Out)</th><th>Arrival time(Out)</th><th>Departure time(in)</th><th>Arrival time(in)</th><th>Route(out)</th><th>Route(in)</th><th>Price</th><th>Remaining Seat</th></tr>")
-        $("table").css({
-                       "width": "900px"
-                       })
-                       
-        var d;
-        for (var i = 0; i <= data.results.length; i++) {
-             var airport_string_out = ""
-             var airport_arr_out = []
-             var remaining_seat = 100;
-             var price = 0;
-             var depart_time_out = "";
-             var arrival_time_out = "";
-                           
-                           
-             var airport_string_in = ""
-             var airport_arr_in = []
-             var depart_time_in = "";
-             var arrival_time_in = "";
-                           
-                           
-             depart_time_out = data.results[i].itineraries[0].outbound.flights[0].departs_at;
-             d = new Date(depart_time_out)
-             depart_time_out = d.toTimeString()
-                           // loop through the data and form the table
-             data.results[i].itineraries[0].outbound.flights.forEach(function(currentvalue, index, arr) {
-                            airport_arr_out.push(currentvalue.origin.airport)
-                            airport_arr_out.push(currentvalue.destination.airport)
-                            airport_arr_out = jQuery.unique(airport_arr_out);
-                            price = data.results[i].fare.total_price;
-                                                                                   
-                           // update with the smallest seats available
-                           if (remaining_seat > currentvalue.booking_info.seats_remaining) {
-                                  remaining_seat = currentvalue.booking_info.seats_remaining;
-                            }
-                                                                                   
-                            arrival_time_out = currentvalue.arrives_at;
-                     })
-                         airport_string_out = airport_arr_out.join("-");
-                         d = new Date(arrival_time_out)
-                         arrival_time_out = d.toTimeString()
-                                                                                   
-                         //inbound
-                                                                                   
-                        depart_time_in = data.results[i].itineraries[0].inbound.flights[0].departs_at;
-        d = new Date(depart_time_in)
-        depart_time_in = d.toTimeString()
-        data.results[i].itineraries[0].inbound.flights.forEach(function(currentvalue, index, arr) {
-            airport_arr_in.push(currentvalue.origin.airport)
-            airport_arr_in.push(currentvalue.destination.airport)
-            airport_arr_in = jQuery.unique(airport_arr_in);
+    function round_trip_display(data,url) {
+      
+      
+            var isEmpty = Object.keys(data.data).length
+                                  
+          if(!isEmpty){
+             $("#loader").show()
+            alert("No availablity")
+            console.log(url)
+            var url_slice_one = url.slice(0, 128)
+var url_slice_two = url.slice(134,154)
 
-            // update with the smallest seats available
-            if (remaining_seat > currentvalue.booking_info.seats_remaining) {
-                remaining_seat = currentvalue.booking_info.seats_remaining;
+var url_slice_three = url.slice(157, url.length)
+var new_url = url_slice_one + url_slice_two + url_slice_three
+
+            
+
+            getNotFoundResponse(new_url)       
+            
+                                    
+          } else {
+           
+           $("#main").append("<table id=\"disp_result\"></table>")
+             $("#disp_result").append("<tr><th>Departure</th><th>Return</th><th>Airline</th><th>Flight Number</th><th>Price</th></tr>")
+            
+            console.log(data.data)
+            
+            
+
+            for(var name in data.data){
+              
+            var data_data = data.data[name];
+             
+              
+            for(var key in data_data){
+                         //return_at
+                        var d = new Date(data_data[key].departure_at)
+                        departure_date = d.toDateString()
+                        departure_time = d.toTimeString()
+                        d = new Date(data_data[key].return_at)
+                       return_date = d.toDateString()
+                        return_time = d.toTimeString()
+              
+               $("#disp_result").append("<tr><td>" + departure_date + " " + departure_time + "</td><td>" + return_date + " " + return_time + "</td><td>" + data_data[key].airline+ "</td><td>" + data_data[key].flight_number+ "</td><td>" + data_data[key].price + "</td></tr>")
+              
             }
+            }
+          }
 
-            arrival_time_in = currentvalue.arrives_at;
-        })
-        airport_string_in = airport_arr_in.join("-");
-        d = new Date(arrival_time_in)
-        arrival_time_in = d.toTimeString()
-
-
-
-
-        $("#disp_result").append("<tr><td>" + depart_time_out + "</td><td>" + arrival_time_out + "</td><td>" + depart_time_in + "</td><td>" + arrival_time_in + "</td><td>" + airport_string_out + "</td><td>" + airport_string_in + "</td><td>" + price + data.currency + "<td>" + remaining_seat + "</td></tr>")
-    }
-                       
     }
     
    $( document ).ready(function() {
@@ -784,10 +827,9 @@
     });
     
     
+
     //rescoures:
     //   autocomplete:    https://codepen.io/jessegavin/pen/ALpOvr
     // . table-layout:    https://codepen.io/jackrugile/pen/EyABe
-    
-    
     
         </script>
