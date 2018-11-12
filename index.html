@@ -241,10 +241,11 @@ var one_way_bool = true;
     $(function() {
       
       $("#loader").hide()
-      
+       $("#search_btn").hide()
       // one way button click function
       $(".one_way_btn").click(function() {
           // adjust the input field css
+               $("#search_btn").show()
                $(".one_way_btn").css({
                         "background-color": "black",
                          "color": "white"
@@ -294,6 +295,7 @@ var one_way_bool = true;
        
         $(".round_trip_btn").click(function() {
             // adjust the input field css
+                $("#search_btn").show()
                 one_way_bool = false;
                 $(".round_trip_btn").css({
                                "background-color": "black",
@@ -822,9 +824,7 @@ var new_url = url_slice_one + url_slice_two + url_slice_three
 
     }
     
-   $( document ).ready(function() {
-        $(".one_way_btn").trigger("click");
-    });
+
     
     
 
